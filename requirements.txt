@@ -1,0 +1,38 @@
+# Requisitos essenciais do projeto
+
+# Web scraping e APIs
+requests==2.32.3
+beautifulsoup4==4.12.3
+yfinance==0.2.36
+
+# Manipulação de dados
+pandas==2.2.3
+numpy==2.2.4
+python-dateutil==2.9.0.post0
+pytz==2025.2
+
+# Visualização (futuro)
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Machine Learning / NLP (futuro)
+scikit-learn==1.4.2
+nltk==3.8.1
+openai==1.23.2
+
+# Banco de dados (futuro)
+sqlalchemy==2.0.29
+pyodbc==5.1.0
+snowflake-connector-python==3.7.1
+
+# Ambientes e notebooks
+jupyter==1.0.0
+ipykernel==6.29.4
+
+# Dependências de rede
+charset-normalizer==3.4.1
+idna==3.10
+six==1.17.0
+tzdata==2025.2
+certifi==2025.1.31
+urllib3==2.4.0
