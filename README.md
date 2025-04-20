@@ -1,79 +1,79 @@
-# 🧠 Inteligência de Mercado — Transporte e Energia
 
-Este projeto tem como objetivo centralizar, processar e analisar dados econômicos e logísticos críticos para o setor de **transporte rodoviário de cargas no Brasil**, com foco em **Diesel**, **Petróleo Brent**, **Frete Rodoviário** e **Indicadores Econômicos**.
+# Projeto Inteligência de Mercado
 
-## 📦 Estrutura
+Este repositório contém a estrutura de um sistema automatizado para coleta, organização e análise de dados econômicos que impactam o setor de produção de caminhões. O projeto visa antecipar cenários de mercado com base em dados públicos e internos, fornecendo suporte técnico à alta gestão.
+
+## 🎯 Objetivo
+
+Correlacionar dados macroeconômicos com variáveis internas de produção (build rate e mix), possibilitando análises preditivas, simulações e relatórios de apoio à tomada de decisão estratégica.
+
+## 🏗️ Estrutura do Projeto
 
 ```
-InteligenciaMercado/
-├── buildrate/               # Scripts de coleta e utilitários
-├── data/                    # Dados armazenados (.csv)
-│   ├── transport/           # Diesel, petróleo, frete
-│   ├── macro/               # IPCA, PIB, etc.
+.
+├── buildrate/                 # Scripts de coleta de dados por tema
+│   ├── collect_agropecuaria.py
+│   ├── collect_credito_empresas.py
 │   └── ...
-├── notebooks/               # Explorações e análises
-├── models/                  # (em breve)
-├── reports/                 # Relatórios e dashboards
-├── README.md                # Este documento
-└── requirements.txt         # Dependências do projeto
+├── utils/                     # Funções auxiliares (ex: sgs_downloader)
+├── data/                      # Armazenamento local em CSV (por tema)
+├── notebooks/                 # Análises exploratórias e validações
+├── models/                    # Modelos preditivos futuros
+├── reports/                   # Relatórios executivos
+├── logs/                      # Histórico de execuções (futuro)
+├── runner.py                 # Orquestrador central de coleta
+└── docs/                      # Documentação e apresentações
 ```
 
-## 📈 Fontes de Dados
+## ⚙️ Execução
 
-| Tema            | Fonte                                            | Formato     |
-|----------------|--------------------------------------------------|-------------|
-| Diesel (preço)  | ANP (Agência Nacional do Petróleo)              | XLSB/XLSX   |
-| Petróleo Brent  | Investing.com / EIA                             | CSV         |
-| Frete Rodoviário| ONTL (Observatório Nacional de Transporte)      | JSON via API|
-| IPCA, PIB, etc  | Banco Central do Brasil (SGS)                   | API         |
+### Ambiente virtual
 
-## 🔍 Definições importantes
-
-### TKU — Tonelada Quilômetro Útil
-Unidade-padrão usada no transporte de cargas. Define o volume transportado multiplicado pela distância percorrida:
-
-```
-TKU = toneladas transportadas × quilômetros percorridos
-```
-
-Exemplo: transportar 10 toneladas por 300 km = 3.000 TKU
-
-Se o frete médio é R$ 0,25 por TKU → custo total = R$ 750,00
-
----
-
-## 🚀 Como executar localmente
-
-1. Clone o repositório:
+Antes de iniciar, instale as dependências:
 ```bash
-git clone https://github.com/seuusuario/InteligenciaMercado.git
-cd InteligenciaMercado
-```
-
-2. Crie o ambiente virtual:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Execute os coletores:
+### Coleta de dados
+
+Para coletar os dados individualmente:
 ```bash
-python buildrate/collection/collect_diesel_anp.py
-python buildrate/collection/collect_brent.py
-python buildrate/collection/collect_frete_ontl.py
+python -m buildrate.collection.collect_credito_empresas
 ```
 
----
+Para executar todos os scripts automaticamente:
+```bash
+python runner.py
+```
 
-## 📌 Observações
+## 📊 Indicadores Utilizados
 
-- Todos os dados utilizados são públicos e de fontes oficiais.
-- Os arquivos `.csv` e `.xls[x|b]` estão incluídos por decisão estratégica, pois são parte integrante do pipeline de transformação e análise.
+- Câmbio: USD/BRL, EUR/BRL
+- Inflação e Juros: IPCA, Selic, CDI, IGP-M
+- Atividade Econômica: PIB, IBC-Br, Consumo, Produção Industrial
+- Crédito PJ (SGS 20616)
+- Emprego (PNAD Contínua via IPEA)
+- Frete Médio Rodoviário (ONTL)
+- Petróleo Brent (EIA)
+- Diesel (ANP)
 
----
+## 🚧 Problemas Conhecidos
 
-## 📬 Contato
+- Exportações SGS 22601 e 22663 (erros 504)
+- Série SGS 24369 substituída por IPEA
 
-Para sugestões, dúvidas ou contribuições:
-- [ENevess](https://github.com/ENevess)
+## 📈 Próximos Passos
+
+- Integração com dados internos da montadora
+- Versionamento automático dos dados
+- Dashboards interativos com simulação de cenários
+- Camada de transformação separada dos coletores
+- Migração para SQL Server ou Snowflake
+
+## 📎 Diagrama de Arquitetura
+
+![Diagrama](diagrama_arquitetura_projeto.png)
+
+## 🧠 Licença
+
+Uso interno. Desenvolvido pela equipe de TI para suporte à diretoria executiva.
