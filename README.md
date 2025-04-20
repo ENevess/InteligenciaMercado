@@ -76,4 +76,4 @@ python buildrate/collection/collect_frete_ontl.py
 ## 📬 Contato
 
 Para sugestões, dúvidas ou contribuições:
-- [Seu Nome ou GitHub](https://github.com/seuusuario)
+- [ENevess](https://github.com/ENevess)
