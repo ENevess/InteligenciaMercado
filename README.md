@@ -1,79 +1,114 @@
 
-# Projeto Inteligência de Mercado
+# 📊 Inteligência de Mercado - Análise Econômica e Simulação de Cenários
 
-Este repositório contém a estrutura de um sistema automatizado para coleta, organização e análise de dados econômicos que impactam o setor de produção de caminhões. O projeto visa antecipar cenários de mercado com base em dados públicos e internos, fornecendo suporte técnico à alta gestão.
+Este projeto tem como objetivo oferecer uma ferramenta robusta e interativa para análise de indicadores macroeconômicos e simulação de cenários que impactam diretamente a indústria de caminhões no Brasil.
+
+---
 
 ## 🎯 Objetivo
 
-Correlacionar dados macroeconômicos com variáveis internas de produção (build rate e mix), possibilitando análises preditivas, simulações e relatórios de apoio à tomada de decisão estratégica.
+O projeto busca apoiar a tomada de decisão estratégica, permitindo:
 
-## 🏗️ Estrutura do Projeto
+- Simulação de impactos econômicos (ex: variação da SELIC, câmbio, diesel)
+- Previsão de comportamento de indicadores como EURO, DÓLAR, DIESEL e SELIC
+- Visualização da correlação entre variáveis econômicas
+- Exploração interativa dos dados históricos coletados
+
+---
+
+## 🧠 Funcionalidades do MVP
+
+### 🔧 Simulador de Cenário
+
+- Previsão de uma variável (EURO, DÓLAR, DIESEL, SELIC)
+- Input manual de outras variáveis para análise de impacto
+- Comentário automático interpretando o resultado
+- Gráfico com tendência futura
+- Índice de correlação com as variáveis de entrada
+
+### 📈 Mapa de Correlações
+
+- Visualização de heatmap entre todos os indicadores coletados
+- Filtro de período de análise
+- Comentário explicativo bilíngue para usuários não técnicos
+
+---
+
+## 🌍 Idiomas suportados
+
+- Português 🇧🇷
+- Inglês 🇺🇸
+
+---
+
+## 🗃️ Indicadores disponíveis
+
+- Câmbio: EUR/BRL, USD/BRL
+- Juros: SELIC
+- Combustíveis: Preço Médio do Diesel (ANP)
+- Inflação: IPCA, IGP-M
+- Atividade Econômica: PIB, IBC-Br, Produção Industrial
+- Crédito: Concessão para Empresas
+- Mercado de Trabalho: Taxa de Desemprego (PNAD Contínua - IPEA)
+
+---
+
+## 📂 Estrutura de Diretórios
 
 ```
-.
-├── buildrate/                 # Scripts de coleta de dados por tema
-│   ├── collect_agropecuaria.py
-│   ├── collect_credito_empresas.py
-│   └── ...
-├── utils/                     # Funções auxiliares (ex: sgs_downloader)
-├── data/                      # Armazenamento local em CSV (por tema)
-├── notebooks/                 # Análises exploratórias e validações
-├── models/                    # Modelos preditivos futuros
-├── reports/                   # Relatórios executivos
-├── logs/                      # Histórico de execuções (futuro)
-├── runner.py                 # Orquestrador central de coleta
-└── docs/                      # Documentação e apresentações
+InteligenciaMercado/
+│
+├── buildrate/             # Scripts de coleta de dados
+├── data/                  # Dados organizados por tema (exchange_rates, macro, transport, etc.)
+├── interface/             # Aplicação Streamlit (visualização)
+│   └── streamlit_app.py
+├── models/                # Modelos de simulação e predição
+│   └── simulation/
+├── notebooks/             # Explorações auxiliares
+├── reports/               # Relatórios gerados
+├── runner.py              # Execução central dos scripts de coleta
+└── README.md              # Documentação do projeto
 ```
 
-## ⚙️ Execução
+---
 
-### Ambiente virtual
+## 🚀 Como Executar Localmente
 
-Antes de iniciar, instale as dependências:
+### 1. Instale as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
-### Coleta de dados
-
-Para coletar os dados individualmente:
+### 2. Execute a aplicação
 ```bash
-python -m buildrate.collection.collect_credito_empresas
+streamlit run interface/streamlit_app.py
 ```
 
-Para executar todos os scripts automaticamente:
-```bash
-python runner.py
-```
+---
 
-## 📊 Indicadores Utilizados
+## 📌 Observações
 
-- Câmbio: USD/BRL, EUR/BRL
-- Inflação e Juros: IPCA, Selic, CDI, IGP-M
-- Atividade Econômica: PIB, IBC-Br, Consumo, Produção Industrial
-- Crédito PJ (SGS 20616)
-- Emprego (PNAD Contínua via IPEA)
-- Frete Médio Rodoviário (ONTL)
-- Petróleo Brent (EIA)
-- Diesel (ANP)
+- Os dados são públicos e coletados via APIs (BCB, IPEA, IBGE, ANP) ou extraídos de planilhas oficiais
+- Todas as previsões são **estimativas simplificadas** baseadas em modelos de regressão linear (MVP)
+- O projeto está preparado para evoluir com novos modelos e mais granularidade
 
-## 🚧 Problemas Conhecidos
+---
 
-- Exportações SGS 22601 e 22663 (erros 504)
-- Série SGS 24369 substituída por IPEA
+## 🧪 Próximos Passos
 
-## 📈 Próximos Passos
+- Adição de novos indicadores (ex: produção caminhões, mix por segmento)
+- Substituição dos modelos lineares por RandomForest/XGBoost
+- Exportação dos cenários em PDF ou XLS
+- Dashboard histórico interativo por série
 
-- Integração com dados internos da montadora
-- Versionamento automático dos dados
-- Dashboards interativos com simulação de cenários
-- Camada de transformação separada dos coletores
-- Migração para SQL Server ou Snowflake
+---
 
-## 📎 Diagrama de Arquitetura
+## 🤝 Contribuição
 
-![Diagrama](diagrama_arquitetura_projeto.png)
+Fique à vontade para sugerir melhorias, abrir issues ou contribuir com código!
 
-## 🧠 Licença
+---
 
-Uso interno. Desenvolvido pela equipe de TI para suporte à diretoria executiva.
+## 🛡️ Licença
+
+Este projeto utiliza dados públicos e não possui restrições de uso para fins educacionais ou analíticos internos.
