@@ -58,7 +58,7 @@ idioma = st.sidebar.selectbox("🌐 Idioma / Language", ["Português", "English"
 txt = TEXTOS[idioma]
 
 # Menu de abas
-aba = st.sidebar.radio("📌 Menu", [txt["menu_simulador"], txt["menu_correlacao"]])
+aba = st.sidebar.radio("📌 Menu", [txt["menu_simulador"], txt["menu_correlacao"], "📌 Visão Geral do Projeto"])
 
 st.title(txt["titulo"])
 
@@ -165,3 +165,56 @@ elif aba == txt["menu_correlacao"]:
     fig, ax = plt.subplots(figsize=(12, 8))
     sns.heatmap(cor, annot=True, cmap="coolwarm", fmt=".2f", linewidths=.5, ax=ax)
     st.pyplot(fig)
+
+elif aba == "📌 Visão Geral do Projeto":
+    st.title("📌 Visão Geral do Projeto")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("✅ Fontes já integradas e entregas realizadas")
+
+        st.markdown("### **Fontes de Dados Integradas**")
+        st.markdown("""
+        - **Banco Central do Brasil (BCB)**  
+          - Câmbio: USD/BRL e EUR/BRL  
+          - Selic: Taxa de juros básica  
+          - Crédito para empresas (SGS 20616)  
+        - **IPEA / IBGE (via ipeadatapy)**  
+          - Taxa de desemprego (PNAD Contínua ajustada)  
+        - **ANP - Agência Nacional do Petróleo**  
+          - Preço do diesel consolidado (2004–2025)  
+        - **ONTL - Observatório Nacional de Transporte e Logística**  
+          - Preço médio do frete em R$/TKU (modal rodoviário)  
+        - **Investing.com**  
+          - Preço do petróleo Brent (via WebScraping)
+        """)
+
+        st.markdown("### **Infraestrutura já implementada**")
+        st.markdown("""
+        - Organização modular por tema (exchange, macro, transport...)
+        - Scripts de coleta com comentários padronizados
+        - Runner centralizado com log rotativo
+        - Interface visual com Streamlit
+        - Matriz de correlação com explicação bilíngue
+        - Modelo inicial de regressão linear
+        """)
+
+    with col2:
+        st.subheader("🚀 Próximos Passos do Projeto")
+
+        passos = [
+            ("Criar aba de exploração histórica interativa", 5, 2, "🔍 Foco em analisar individualmente cada variável ao longo do tempo com filtros de período e visualização detalhada."),
+            ("Substituir modelo de regressão linear por RandomForest/XGBoost", 5, 4, "Aumenta a robustez das previsões."),
+            ("Adicionar novos indicadores econômicos", 4, 2, "Ampliar base com produção, consumo, PIB, etc."),
+            ("Exportação dos resultados para PDF e XLS", 4, 3, "Facilita envio de relatórios e apresentações."),
+            ("Criar input textual para simulação (NLP simplificado)", 4, 4, "Simulação via linguagem natural."),
+            ("Implementar logs detalhados de execução no runner.py", 3, 1, "Rastreabilidade das coletas."),
+            ("Criar sistema de versão dos dados (carimbo de coleta)", 3, 2, "Base para auditoria."),
+            ("Adicionar dashboard comparativo entre variáveis", 4, 3, "📊 Foco em exibir múltiplas variáveis no mesmo gráfico para facilitar comparação e análise de correlações visuais."),
+            ("Validar previsões com dados internos futuros (build rate real)", 5, 4, "Comprova valor preditivo."),
+            ("Adicionar camada de alerta automático por indicador", 3, 3, "Notificações para desvios anormais."),
+        ]
+
+        for nome, impacto, complexidade, desc in passos:
+            st.markdown(f"**• {nome}**  \n> {desc}  \n> 🔥 Impacto: {'⭐' * impacto}  \n> 🧩 Complexidade: {'⭐' * complexidade}\n")
